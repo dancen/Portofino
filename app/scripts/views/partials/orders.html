@@ -1,0 +1,64 @@
+
+<!-- Orders -->
+<section id="orders" class="portfolio" ng-show="getModel().getLogged()" ng-controller="OrdersController">   
+    <div class="container">
+        <div ng-include="'./app/scripts/views/partials/header.html'"></div>
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="row text-center">
+                    <h2>Table Nr. {{ getModel().getCurrentTable() }}</h2>
+                    <hr class="small">
+
+                    <div ng-if="getModel().getTotalAmountTable() < 1"><a href="#tables" class="btn btn-sm btn-dark" ng-click="loadTables()">  No orders yet </a> 
+                        <a href="#tables" class="btn btn-sm btn-dark" ng-click="loadTables()"> <span title="Go back to the Table's list" class="glyphicon glyphicon-list"> </span> </a> </div>
+
+                    <table class="table" ng-if="getModel().getTotalAmountTable() > 0">
+                        <thead>
+                            <tr>
+                                <th>Tab.</th>
+                                <th></th>
+                                <th>Act.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td>{{ table.id}}</td>
+                                <td></td>
+                                <td class="order-paid">
+                                    <a href="#tables" class="btn btn-sm btn-dark" ng-show="getModel().getTotalAmountTable() > 0" ng-click="closeTable()"><span title="Close the table paid" class="glyphicon glyphicon-log-out"></span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Orders</b></td>
+                                <td></td>
+                                <td><b>Status</b></td>
+                            </tr>
+                            <tr ng-repeat="order in getModel().getTable().orders">
+                                <td><span class="item-qty">{{ order.quantity}}</span> {{ order.item}}</td>
+                                <td>{{ order.amount|currency }}</td> 
+                                <td><span ng-class="{'waiting': order.status == 'WAITING','served': order.status == 'SERVED', 'reserved': order.status == 'RESERVED'}">{{ order.status}}</span></td> 
+                            </tr>
+                            <tr>
+                                <td class="total-amount-paid">Total amount: </td>
+                                <td class="total-amount">{{ getModel().getTotalAmountTable() | currency }}</td> 
+                                <td><a href="#tables" class="btn btn-sm btn-dark" ng-click="servedTable()" ng-show="getModel().getTotalAmountTable() > 0">
+                                        <span title="Set the status as served" class="glyphicon glyphicon-thumbs-up"></span></a>
+                                    <a href="#tables" class="btn btn-sm btn-dark" ng-click="loadTables()"> <span title="Go back to the Table's list" class="glyphicon glyphicon-list"></span></a>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>  

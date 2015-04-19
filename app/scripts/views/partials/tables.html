@@ -1,0 +1,43 @@
+
+
+<!-- tables -->
+        <section id="tables" class="services bg-tables" ng-show="getModel().getLogged()" ng-controller="TableController">   
+            
+            <div class="container" ng-init="loadTables()">
+                <div ng-include="'./app/scripts/views/partials/header.html'"></div>
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1 text-center">
+                        <div class="row text-center">
+                            <h2>Tables</h2>
+                            <hr class="small">                            
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Act.</th>
+                                        <th>Nr.</th>
+                                        <th>Cap.</th>
+                                        <th>Status</th>
+                                        <th>Waiter</th>
+                                        <th style="text-align: right;">Man.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="t in getModel().getTables()" ng-class="{even: $even, odd: $odd}">
+                                        <td><a href="#orders" class="btn btn-sm btn-dark" ng-click="showTable(t.id)"><span title="Show current orders" class="glyphicon glyphicon-list"></span></a></td>
+                                        <td>{{ t.id}}</td>
+                                        <td>{{ t.capacity}} seats</td>
+                                        <td ng-class="{'waiting': t.status == 'WAITING','served': t.status == 'SERVED','free': t.status == 'FREE','reserved': t.status == 'RESERVED'}" ><span ng-bind="showStatus(t.status,t.updated_at.date)"></span> <span compile="getModel().getWaitingTimeLabel()"></span></td>
+                                        <td>{{ t.waiter}}</td>
+                                        <td class="order-open" style="text-align: right;"><a href="#new-order" class="btn btn-sm btn-dark" ng-click="order(t);"><span title="Add an order to the Table" class="glyphicon glyphicon-pencil"></span></a></td>
+                                    </tr> 
+                                </tbody>
+                            </table>
+                            <a href="#tables" class="btn btn-large btn-dark" ng-click="loadTables()"><span title="Refresh the Table's list" class="glyphicon glyphicon-refresh"></span> Refresh Tables</a>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-10 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>

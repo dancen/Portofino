@@ -1,0 +1,92 @@
+
+<!-- Orders -->
+<section id="order" class="portfolio" ng-show="getModel().getLogged()" ng-controller="OrderController">   
+    <div ng-include="'./app/scripts/views/partials/header.html'"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="row text-center">
+                    <h2>New Order</h2>
+                    <hr class="small">
+                    <a href="#tables" class="btn btn-sm btn-dark" ng-click="loadTables()"><span title="Go back to the Table's list" class="glyphicon glyphicon-list"></span> Show Tables</a>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tab.</th>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Act.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center">{{ getModel().getCurrentTable()}}</td>
+                                <td>
+
+                                    <div class="btn-group" ng-init="getModel().setCurrentItem(products[0].name);
+                                                            getModel().setCurrentAmount(products[0].price);">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            {{ getModel().getCurrentItem() }} <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li ng-repeat="product in products">
+                                                <a href="" ng-click="getModel().setCurrentItem(product.name);
+                                                                        getModel().setCurrentAmount(product.price);">
+                                                    {{ product.name}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group" ng-init="getModel().setCurrentQuantity(1)">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            {{ getModel().getCurrentQuantity()}} <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(1)">1</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(2)">2</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(3)">3</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(4)">4</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(5)">5</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(6)">6</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(7)">7</a></li>
+                                            <li><a href="" ng-click="getModel().setCurrentQuantity(8)">8</a></li>
+                                        </ul>
+
+
+                                    </div>
+
+                                </td>
+                                <td class="order-open"><button class="btn btn-sm btn-dark" ng-click="addOrder()"><span title="Add an order" class="glyphicon glyphicon-plus-sign"></span></button></td>
+                            </tr>
+
+                            <tr ng-repeat="co in getModel().getCurrentOrder()">
+                                <td></td>
+                                <td><span class="order-taken">{{ co.item}}</span></td>
+                                <td><span class="order-taken">{{ co.quantity}} - {{ co.amount | currency }} </span></td>
+                                <td><button class="btn btn-sm btn-dark" ng-click="removeOrder(co.item)"><span title="Remove an order" class="glyphicon glyphicon-remove"></span></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td colspan="2">Total amount: <span class="order-open">{{ getModel().getTotalAmount() | currency }}</span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td colspan="2" class="order-open"><a href="#tables" class="btn btn-sm btn-dark" ng-show="getModel().getTotalAmount() > 0" ng-click="saveOrder()"><span title="Save the order" class="glyphicon glyphicon-save"></span> Save order</a></td>
+
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section> 

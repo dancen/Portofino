@@ -1,0 +1,47 @@
+<!-- login -->
+<section id="login" ng-hide="getModel().getLogged()" ng-controller="LoginController">            
+            <!-- Call to Action -->
+            <aside class="call-to-action bg-primary">                
+                <div class="container">
+                    <div ng-include="'./app/scripts/views/partials/header.html'"></div>
+                    <div class="row marginbot-80">
+
+                        <div class="col-md-4 col-md-offset-4">
+                            <form id="auth-form" action="#control-panel" novalidate>
+                                <div class="row text-center">
+                                    <h2>Login</h2>
+                                    <hr class="small">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control input-lg" ng-model="usr" placeholder="Enter email" required="required" type="email">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control input-lg" ng-model="pwd" placeholder="Enter password" required="required" type="password">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-center">
+                                        <div class="btn-error login-error" id="auth-error" ng-bind="errors"></div>
+                                        <button type="submit" ng-click="auth()" class="btn btn-lg btn-dark">Submit!</button>
+                                        <a href="#" class="btn btn-lg btn-light">Forgot?</a>
+                                        <hr class="small">
+                                        <p>You don't need to change password<b> Every month you will receive a new password by SMS on your Smartphone</b></p>
+                                        
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+            </aside>
+        </section>
+        <!-- /Section: login -->
